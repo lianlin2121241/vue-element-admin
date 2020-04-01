@@ -1,10 +1,16 @@
 import request from '@/utils/request'
+import qs from 'qs'
 
 export function login(data) {
   return request({
-    url: '/vue-element-admin/user/login',
+    // url: '/vue-element-admin/user/login',
+    url: '/estate-agency/sys/login',
     method: 'post',
-    data
+    // headers: {
+    //   'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
+    //   {'X-Requested-With': 'XMLHttpRequest'}
+    // },
+    data: qs.stringify(data)
   })
 }
 

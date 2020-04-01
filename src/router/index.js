@@ -130,6 +130,29 @@ export const constantRoutes = [
  */
 export const asyncRoutes = [
   {
+    path: '/estateAgency',
+    component: Layout,
+    redirect: '/estateAgency/areaCategory',
+    alwaysShow: true, // will always show the root menu
+    name: 'estateAgency',
+    meta: {
+      title: '房屋管理',
+      icon: 'lock',
+      roles: ['admin', 'editor'] // you can set roles in root nav
+    },
+    children: [
+      {
+        path: 'areaCategory',
+        component: () => import('@/views/estate-agency/area-category'),
+        name: 'areaCategory',
+        meta: {
+          title: '区域类别',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      }
+    ]
+  },
+  {
     path: '/permission',
     component: Layout,
     redirect: '/permission/page',
