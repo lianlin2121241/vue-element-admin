@@ -1,4 +1,5 @@
 import request from '@/utils/request'
+import requestMock from '@/utils/request-mock'
 import qs from 'qs'
 
 export function login(data) {
@@ -14,17 +15,23 @@ export function login(data) {
   })
 }
 
-export function getInfo(token) {
+export function getRoles() {
   return request({
-    url: '/vue-element-admin/user/info',
-    method: 'get',
-    params: { token }
+    url: '/estate-agency/sys/menu/nav',
+    method: 'get'
+  })
+}
+
+export function getInfo() {
+  return request({
+    url: '/estate-agency/sys/user/info',
+    method: 'get'
   })
 }
 
 export function logout() {
   return request({
-    url: '/vue-element-admin/user/logout',
-    method: 'post'
+    url: '/estate-agency/sys/logoutsys',
+    method: 'get'
   })
 }

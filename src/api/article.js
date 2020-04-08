@@ -1,7 +1,8 @@
 import request from '@/utils/request'
+import requestMock from '@/utils/request-mock'
 
 export function fetchList(query) {
-  return request({
+  return requestMock({
     url: '/vue-element-admin/article/list',
     method: 'get',
     params: query
@@ -9,7 +10,7 @@ export function fetchList(query) {
 }
 
 export function fetchArticle(id) {
-  return request({
+  return requestMock({
     url: '/vue-element-admin/article/detail',
     method: 'get',
     params: { id }
@@ -17,7 +18,7 @@ export function fetchArticle(id) {
 }
 
 export function fetchPv(pv) {
-  return request({
+  return requestMock({
     url: '/vue-element-admin/article/pv',
     method: 'get',
     params: { pv }
@@ -25,7 +26,7 @@ export function fetchPv(pv) {
 }
 
 export function createArticle(data) {
-  return request({
+  return requestMock({
     url: '/vue-element-admin/article/create',
     method: 'post',
     data
@@ -33,7 +34,7 @@ export function createArticle(data) {
 }
 
 export function updateArticle(data) {
-  return request({
+  return requestMock({
     url: '/vue-element-admin/article/update',
     method: 'post',
     data

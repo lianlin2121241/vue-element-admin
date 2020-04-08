@@ -41,6 +41,22 @@ module.exports = {
         target: 'http://192.168.43.104:8090',
         pathRewrite: {
           ['^' + process.env.VUE_APP_BASE_API]: ''
+        },
+        onProxyRes: function(proxyRes, req, res) {
+          var cookies = proxyRes.headers['set-cookie'];
+          var cookieRegex = /Path=\/estate-agency/i;
+          //修改cookie Path
+          if (cookies) {
+            var newCookie = cookies.map(function(cookie) {
+              if (cookieRegex.test(cookie)) {
+                return cookie.replace(cookieRegex, 'Path=/');
+              }
+              return cookie;
+            });
+            //修改cookie path
+            delete proxyRes.headers['set-cookie'];
+            proxyRes.headers['set-cookie'] = newCookie;
+          }
         }
       }
     },
@@ -54,6 +70,9 @@ module.exports = {
       alias: {
         '@': resolve('src')
       }
+    },
+    externals: {
+      globalVar: 'window.globalVar'
     }
   },
   chainWebpack(config) {
