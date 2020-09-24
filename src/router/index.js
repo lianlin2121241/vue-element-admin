@@ -153,6 +153,29 @@ export const asyncRoutes = [
     ]
   },
   {
+    path: '/agencyManage',
+    component: Layout,
+    redirect: '/agencyManage/agency',
+    alwaysShow: true, // will always show the root menu
+    name: 'agencyManage',
+    meta: {
+      title: '经纪人管理',
+      icon: 'lock',
+      roles: ['admin', 'editor'] // you can set roles in root nav
+    },
+    children: [
+      {
+        path: 'agency',
+        component: () => import('@/views/agent-manage/agency'),
+        name: 'agency',
+        meta: {
+          title: '经济公司管理',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      }
+    ]
+  },
+  {
     path: '/permission',
     component: Layout,
     redirect: '/permission/page',
