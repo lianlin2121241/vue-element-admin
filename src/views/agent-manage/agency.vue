@@ -7,7 +7,7 @@
     <el-table
       :data="tableData.list"
       style="width: 100%;margin-bottom: 20px;"
-      row-key="categoryId"
+      row-key="id"
       border
       @selection-change="handleSelectionChange"
     >
