@@ -2,21 +2,21 @@ import request from '@/utils/request'
 
 export function getDataList() {
   return request({
-    url: '/estate-agency/estateAgency/areacategory/list',
+    url: `${window.globalVar.contextPath}/estateAgency/areacategory/list`,
     method: 'get'
   })
 }
 
 export function getDataTree() {
   return request({
-    url: '/estate-agency/estateAgency/areacategory/tree',
+    url: `${window.globalVar.contextPath}/estateAgency/areacategory/tree`,
     method: 'get'
   })
 }
 
 export function save(data) {
   return request({
-    url: '/estate-agency/estateAgency/areacategory/save',
+    url: `${window.globalVar.contextPath}/estateAgency/areacategory/save`,
     method: 'post',
     data: data
   })
@@ -24,7 +24,7 @@ export function save(data) {
 
 export function update(data) {
   return request({
-    url: '/estate-agency/estateAgency/areacategory/update',
+    url: `${window.globalVar.contextPath}/estateAgency/areacategory/update`,
     method: 'post',
     data: data
   })
@@ -32,7 +32,7 @@ export function update(data) {
 
 export function deleteData(id) {
   return request({
-    url: '/estate-agency/estateAgency/areacategory/delete',
+    url: `${window.globalVar.contextPath}/estateAgency/areacategory/delete`,
     method: 'post',
     params: {
       categoryId: id
