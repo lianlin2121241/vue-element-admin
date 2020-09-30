@@ -8,6 +8,13 @@ export function getDataList(params) {
   })
 }
 
+export function getDataListAll() {
+  return request({
+    url: `${window.globalVar.contextPath}/estateAgency/agency/listAll`,
+    method: 'get'
+  })
+}
+
 export function save(data) {
   return request({
     url: `${window.globalVar.contextPath}/estateAgency/agency/save`,

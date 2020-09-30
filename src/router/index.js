@@ -172,6 +172,15 @@ export const asyncRoutes = [
           title: '经济公司管理',
           roles: ['admin'] // or you can only set roles in sub nav
         }
+      },
+      {
+        path: 'agent',
+        component: () => import('@/views/agent-manage/agent'),
+        name: 'agent',
+        meta: {
+          title: '经济人管理',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
       }
     ]
   },
