@@ -73,7 +73,8 @@ module.exports = {
     },
     externals: {
       globalVar: 'window.globalVar'
-    }
+    },
+    devtool:"source-map"
   },
   chainWebpack(config) {
     config.plugins.delete('preload') // TODO: need test

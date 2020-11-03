@@ -185,6 +185,29 @@ export const asyncRoutes = [
     ]
   },
   {
+    path: '/areaManage',
+    component: Layout,
+    redirect: '/areaManage/area',
+    alwaysShow: true, // will always show the root menu
+    name: 'areaManage',
+    meta: {
+      title: '小区管理',
+      icon: 'lock',
+      roles: ['admin', 'editor'] // you can set roles in root nav
+    },
+    children: [
+      {
+        path: 'area',
+        component: () => import('@/views/area-manage/area'),
+        name: 'area',
+        meta: {
+          title: '小区管理',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      }
+    ]
+  },
+  {
     path: '/permission',
     component: Layout,
     redirect: '/permission/page',
