@@ -15,6 +15,8 @@ import App from './App'
 import store from './store'
 import router from './router'
 
+import './initinf'
+
 import './icons' // icon
 import './permission' // permission control
 import './utils/error-log' // error log
@@ -22,6 +24,8 @@ import './utils/error-log' // error log
 import * as filters from './filters' // global filters
 
 import Cascader from 'ant-design-vue/lib/cascader';
+
+import commonMixin from '@/mixins/commonMixin'
 
 /**
  * If you don't want to use mock-server
@@ -48,6 +52,8 @@ Object.keys(filters).forEach(key => {
 })
 
 Vue.config.productionTip = false
+
+Vue.mixin(commonMixin)
 
 new Vue({
   el: '#app',

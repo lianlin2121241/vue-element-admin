@@ -208,6 +208,49 @@ export const asyncRoutes = [
     ]
   },
   {
+    path: '/houseManage',
+    component: Layout,
+    redirect: '/houseManage/secondHandList',
+    alwaysShow: true, // will always show the root menu
+    name: 'houseManage',
+    meta: {
+      title: '房源管理',
+      icon: 'lock',
+      roles: ['admin', 'editor'] // you can set roles in root nav
+    },
+    children: [
+      {
+        path: 'secondHandList',
+        component: () => import('@/views/house-manage/secondHandList'),
+        name: 'secondHandList',
+        meta: {
+          title: '二手房',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      },
+      {
+        path: 'secondHandEdit',
+        component: () => import('@/views/house-manage/secondHandEdit'),
+        name: 'secondHandEdit',
+        alwaysShow: false, // will always show the root menu
+        meta: {
+          title: '二手房编辑',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      },
+      {
+        path: 'secondHandDetail',
+        component: () => import('@/views/house-manage/secondHandDetail'),
+        name: 'secondHandDetail',
+        alwaysShow: false, // will always show the root menu
+        meta: {
+          title: '二手房详情',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      }
+    ]
+  },
+  {
     path: '/permission',
     component: Layout,
     redirect: '/permission/page',

@@ -1,3 +1,7 @@
+import dict from './modules/dict'
+const dictMap={};
+Object.keys(dict.state).forEach(item=>{dictMap[item]=state=>state.dict[item]})
+
 const getters = {
   sidebar: state => state.app.sidebar,
   size: state => state.app.size,
@@ -10,6 +14,7 @@ const getters = {
   introduction: state => state.user.introduction,
   roles: state => state.user.roles,
   permission_routes: state => state.permission.routes,
-  errorLogs: state => state.errorLog.logs
+  errorLogs: state => state.errorLog.logs,
+  ...dictMap
 }
 export default getters

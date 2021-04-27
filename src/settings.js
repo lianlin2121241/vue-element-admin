@@ -31,5 +31,42 @@ module.exports = {
    * The default is only used in the production env
    * If you want to also use it in dev, you can pass ['production', 'development']
    */
-  errorLog: 'production'
+  errorLog: 'production',
+  /**
+   * 字典值
+   * bedroomOriented	主卧朝向
+   * buildingType	建筑类型
+   * decorationStatus	装修情况
+   * feeDetail	费用明细
+   * heating	供暖
+   * houseStructure	户型结构
+   * houseTypes	房屋类型
+   * houseYearLimit	房屋年限
+   * priceMode	付款方式
+   * propertyTypes	产权类型
+   * propertyYears	产权年限
+   * publicFacilities	公共设施
+   * relatedFacilities	房间设施
+   * roomMode	卧室类型
+   * sex	性别
+   * visitTime	看房时间
+   */
+  dictTypes:[
+    'bedroomOriented',
+    'buildingType',
+    'decorationStatus',
+    'feeDetail',
+    'heating',
+    'houseStructure',
+    'houseTypes',
+    'houseYearLimit',
+    'priceMode',
+    'propertyTypes',
+    'propertyYears',
+    'publicFacilities',
+    'relatedFacilities',
+    'roomMode',
+    'sex',
+    'visitTime'
+  ]
 }
