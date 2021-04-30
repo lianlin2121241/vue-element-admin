@@ -4,7 +4,7 @@ import Layout from '@/layout'
 
 const componentsRouter = {
   path: '/components',
-  component: Layout,
+  component: () => import("@/views/test"),
   redirect: 'noRedirect',
   name: 'ComponentDemo',
   meta: {
