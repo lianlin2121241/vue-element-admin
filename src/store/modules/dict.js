@@ -1,4 +1,4 @@
-import { getDictByTypes } from "@/api/dict";
+import { getDictByType } from "@/api/dict";
 import { dictTypes } from "@/settings";
 
 const state = {};
@@ -14,15 +14,26 @@ const mutations = {
 };
 
 const actions = {
-  async getAllDict({ commit }) {
-    const { data } = await getDictByTypes(dictTypes);
-    for (const key in data) {
-      if (Object.hasOwnProperty.call(data, key)) {
-        commit('SET_DICT',{
-          type:key,
-          value:data[key]
-        })
+  async getDict({ commit }, dicCodes) {
+    if (typeof decCodes === "string") {
+      dicCodes = [dicCodes];
+    }
+    //找出state中没有的字典
+    let loadDics = dicCodes.reduce((accumulator, currentValue) => {
+      if (state[currentValue].length === 0) {
+        accumulator.push(currentValue);
       }
+      return accumulator;
+    }, []);
+    if (loadDics.length === 0) {
+      return;
+    }
+    const { data } = await getDictByType(loadDics.join(","));
+    for (const key in data) {
+      commit("SET_DICT", {
+        type: key,
+        value: data[key].dictDetailList
+      });
     }
   }
 };

@@ -1,3 +1,7 @@
-import store from './store'
+import store from "./store";
 
-store.dispatch('getAllDict');//获取数据字典
+store.dispatch("getDict", [
+  "bedroomOriented",
+  "buildingType",
+  "decorationStatus"
+]); //获取数据字典
