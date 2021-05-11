@@ -149,6 +149,15 @@ export const asyncRoutes = [
           title: "区域类别",
           roles: ["admin"] // or you can only set roles in sub nav
         }
+      },
+      {
+        path: "tagManage",
+        component: () => import("@/views/tag-manage"),
+        name: "tagManage",
+        meta: {
+          title: "标签管理",
+          roles: ["admin"] // or you can only set roles in sub nav
+        }
       }
     ]
   },
