@@ -308,7 +308,7 @@ export default {
     },
     onAreaCategoryChange(value) {
       this.temp.areaCategoryIdArr = value;
-      this.temp.areaCategory=value[value.length-1];
+      this.temp.areaCategory = value[value.length - 1];
       console.log(value);
     },
     areaCategoryString: function(data) {
@@ -332,15 +332,17 @@ export default {
       this.searchObj = Object.assign({}, this.searchObjTemp);
       getDataList(this.searchObj).then(response => {
         this.tableData = response.data;
-        this.tableData.list=this.tableData.list.map(item=>{
-          item.areaCategoryStringArrConvert=this.areaCategoryString(item.areaCategoryStringArr);
+        this.tableData.list = this.tableData.list.map(item => {
+          item.areaCategoryStringArrConvert = this.areaCategoryString(
+            item.areaCategoryStringArr
+          );
           return item;
-        })
+        });
       });
     },
     handleAvatarSuccess(res, file) {
       this.temp.fileIds.push(res.data.fileId);
-      file.fileId=res.data.fileId;
+      file.fileId = res.data.fileId;
       this.imageUrl = URL.createObjectURL(file.raw);
     },
     beforeAvatarUpload(file) {
@@ -388,7 +390,7 @@ export default {
         traffic: "",
         fileIds: []
       };
-      this.$refs.uploadFile&&this.$refs.uploadFile.clearFiles();
+      this.$refs.uploadFile && this.$refs.uploadFile.clearFiles();
       // this.imageUrl=""
     },
     handleCreate() {
@@ -405,7 +407,7 @@ export default {
       info.areaCategoryIdArr = info.data.areaCategoryIdArr.reverse();
       this.fileList = info.data.fileIds.map(item => {
         return {
-          fileId:item,
+          fileId: item,
           name: item,
           url: this.imageStUrl(item)
         };
