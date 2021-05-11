@@ -10,10 +10,13 @@
         :model="formData"
         label-position="right"
         label-width="160px"
-        style="margin-left:50px;margin-right:50px;"
+        style="margin-left: 50px; margin-right: 50px"
       >
         <el-form-item label="小区名称" prop="communityId">
-          <select-area v-model="formData.communityId" style="width:300px"></select-area>
+          <select-area
+            v-model="formData.communityId"
+            style="width: 300px"
+          ></select-area>
         </el-form-item>
         <el-form-item label="户室号" prop="houseNumberBuilding">
           <el-input
@@ -75,8 +78,9 @@
               v-for="(item, index) in propertyYearsOptions"
               :key="index"
               :label="item.value"
-              >{{ item.code }}</el-radio
             >
+              {{ item.code }}
+            </el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="产权类型" prop="propertyTypes">
@@ -85,8 +89,9 @@
               v-for="(item, index) in propertyTypesOptions"
               :key="index"
               :label="item.value"
-              >{{ item.code }}</el-radio
             >
+              {{ item.code }}
+            </el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="主卧朝向" prop="bedroomOriented">
@@ -95,8 +100,9 @@
               v-for="(item, index) in bedroomOriented"
               :key="index"
               :label="item.value"
-              >{{ item.code }}</el-radio
             >
+              {{ item.code }}
+            </el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="房屋类型" prop="houseTypes">
@@ -105,8 +111,9 @@
               v-for="(item, index) in houseTypesOptions"
               :key="index"
               :label="item.value"
-              >{{ item.code }}</el-radio
             >
+              {{ item.code }}
+            </el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="建筑形式" prop="buildingTypes">
@@ -115,8 +122,9 @@
               v-for="(item, index) in buildingTypes"
               :key="index"
               :label="item.value"
-              >{{ item.code }}</el-radio
             >
+              {{ item.code }}
+            </el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="装修情况" prop="decorationStatus">
@@ -125,8 +133,9 @@
               v-for="(item, index) in decorationStatusOptions"
               :key="index"
               :label="item.value"
-              >{{ item.code }}</el-radio
             >
+              {{ item.code }}
+            </el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="是否配有电梯" prop="elevator">
@@ -141,8 +150,9 @@
               v-for="(item, index) in heatingOptions"
               :key="index"
               :label="item.value"
-              >{{ item.code }}</el-radio
             >
+              {{ item.code }}
+            </el-radio>
           </el-radio-group>
         </el-form-item>
       </el-form>
@@ -157,7 +167,7 @@
         :model="formData"
         label-position="right"
         label-width="160px"
-        style="margin-left:50px;margin-right:50px;"
+        style="margin-left: 50px; margin-right: 50px"
       >
         <el-form-item label="房屋年限" prop="houseYearLimit">
           <el-radio-group v-model="formData.houseYearLimit">
@@ -165,8 +175,9 @@
               v-for="(item, index) in houseYearLimitOptions"
               :key="index"
               :label="item.value"
-              >{{ item.code }}</el-radio
             >
+              {{ item.code }}
+            </el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="是否为房主唯一住房" prop="uniqueHouse">
@@ -202,7 +213,7 @@
         :model="formData"
         label-position="right"
         label-width="160px"
-        style="margin-left:50px;margin-right:50px;"
+        style="margin-left: 50px; margin-right: 50px"
       >
         <el-form-item label="室内图">
           <el-upload
@@ -330,7 +341,7 @@
         :model="formData"
         label-position="right"
         label-width="160px"
-        style="margin-left:50px;margin-right:50px;"
+        style="margin-left: 50px; margin-right: 50px"
       >
         <el-form-item label="房屋标题" prop="smartTitle">
           <el-row>
@@ -341,27 +352,16 @@
                 v-model="text"
                 maxlength="30"
                 show-word-limit
-              >
-              </el-input
-            ></el-col>
+              ></el-input>
+            </el-col>
           </el-row>
         </el-form-item>
         <el-form-item label="房源标签">
-          <el-select
-            filterable
-            remote
-            reserve-keyword
-            :remote-method="remoteMethod"
-            :loading="loading"
-          >
-            <el-option
-              v-for="item in areaOptions"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            >
-            </el-option>
-          </el-select>
+          <el-row>
+            <el-col :span="16">
+              <select-tag></select-tag>
+            </el-col>
+          </el-row>
         </el-form-item>
         <el-form-item label="房屋详情" prop="houseDetail">
           <el-row>
@@ -372,9 +372,8 @@
                 v-model="formData.houseDetail"
                 maxlength="2000"
                 show-word-limit
-              >
-              </el-input
-            ></el-col>
+              ></el-input>
+            </el-col>
           </el-row>
         </el-form-item>
         <el-form-item label="业主心态" prop="ownerFeel">
@@ -386,9 +385,8 @@
                 v-model="formData.ownerFeel"
                 maxlength="2000"
                 show-word-limit
-              >
-              </el-input
-            ></el-col>
+              ></el-input>
+            </el-col>
           </el-row>
         </el-form-item>
         <el-form-item label="服务介绍" prop="serviceIntro">
@@ -400,9 +398,8 @@
                 v-model="formData.serviceIntro"
                 maxlength="2000"
                 show-word-limit
-              >
-              </el-input
-            ></el-col>
+              ></el-input>
+            </el-col>
           </el-row>
         </el-form-item>
       </el-form>
@@ -424,6 +421,7 @@ import { mapGetters, mapState } from "vuex";
 import { dictTypes } from "@/settings";
 import { convertDictMapStateByObject } from "@/utils/store-util";
 import SelectArea from "@/components/SelectArea";
+import SelectTag from "@/components/SelectTag";
 import store from "@/store";
 
 import _ from "lodash";
@@ -436,7 +434,7 @@ let dictToCompute = {
   buildingType: "buildingTypes",
   decorationStatus: "decorationStatusOptions",
   heating: "heatingOptions",
-  houseYearLimit: "houseYearLimitOptions"
+  houseYearLimit: "houseYearLimitOptions",
 };
 let dictMapStateObj = convertDictMapStateByObject(dictToCompute);
 export default {
@@ -485,7 +483,7 @@ export default {
         recordNumber: "",
         propertyTypes: "",
         panshiHouseId: "",
-        businessFileSaveDTOs: ""
+        businessFileSaveDTOs: "",
       },
       uploadFileUrl: `${window.globalVar.fileUploadUrl}`,
       tableData: {},
@@ -493,13 +491,13 @@ export default {
       dialogStatus: "",
       textMap: {
         update: "修改",
-        create: "新增"
+        create: "新增",
       },
       areaCategoryOptions: [],
       areaCategoryFieldNames: {
         label: "name",
         value: "categoryId",
-        children: "children"
+        children: "children",
       },
       // buildingType: [],
       fileList: [],
@@ -523,7 +521,7 @@ export default {
         introduction: "",
         supporting: "",
         traffic: "",
-        fileIds: []
+        fileIds: [],
       },
       rules: {
         // name: [{ required: true, message: "姓名必填", trigger: "blur" }],
@@ -532,16 +530,16 @@ export default {
       searchObj: {},
       searchObjTemp: {
         pageSize: 10,
-        pageNum: 1
+        pageNum: 1,
       },
       multipleSelection: [],
       imageUrl: "",
-      defaultPhoto: require("@/assets/defaultPhoto.png")
+      defaultPhoto: require("@/assets/defaultPhoto.png"),
     };
   },
   computed: {
     // ...mapGetters(dictTypes),
-    ...mapState(dictMapStateObj)
+    ...mapState(dictMapStateObj),
   },
   created() {
     // this.getBuildingType();
@@ -552,7 +550,8 @@ export default {
     this.getDataListFun();
   },
   components: {
-    SelectArea
+    SelectArea,
+    SelectTag,
   },
   methods: {
     /**
@@ -563,7 +562,7 @@ export default {
         this.loading = true;
         setTimeout(() => {
           this.loading = false;
-          this.options = this.list.filter(item => {
+          this.options = this.list.filter((item) => {
             return item.label.toLowerCase().indexOf(query.toLowerCase()) > -1;
           });
         }, 200);
@@ -577,7 +576,7 @@ export default {
       // console.log(file);
     },
     handleRemove(file, fileList) {
-      this.temp.fileIds = fileList.map(item => {
+      this.temp.fileIds = fileList.map((item) => {
         return item.fileId;
       });
     },
@@ -590,7 +589,7 @@ export default {
       this.temp.areaCategory = value[value.length - 1];
       console.log(value);
     },
-    areaCategoryString: function(data) {
+    areaCategoryString: function (data) {
       if (!Array.isArray(data)) {
         return [];
       }
@@ -609,9 +608,9 @@ export default {
     },
     getDataListFun() {
       this.searchObj = Object.assign({}, this.searchObjTemp);
-      getDataList(this.searchObj).then(response => {
+      getDataList(this.searchObj).then((response) => {
         this.tableData = response.data;
-        this.tableData.list = this.tableData.list.map(item => {
+        this.tableData.list = this.tableData.list.map((item) => {
           item.areaCategoryStringArrConvert = this.areaCategoryString(
             item.areaCategoryStringArr
           );
@@ -667,7 +666,7 @@ export default {
         introduction: "",
         supporting: "",
         traffic: "",
-        fileIds: []
+        fileIds: [],
       };
       this.$refs.uploadFile && this.$refs.uploadFile.clearFiles();
       // this.imageUrl=""
@@ -684,11 +683,11 @@ export default {
       this.resetTemp();
       let info = await getInfoById(id);
       info.areaCategoryIdArr = info.data.areaCategoryIdArr.reverse();
-      this.fileList = info.data.fileIds.map(item => {
+      this.fileList = info.data.fileIds.map((item) => {
         return {
           fileId: item,
           name: item,
-          url: this.imageStUrl(item)
+          url: this.imageStUrl(item),
         };
       });
       this.temp = Object.assign({}, info.data); // copy obj
@@ -699,7 +698,7 @@ export default {
       });
     },
     saveData() {
-      this.$refs["dataForm"].validate(valid => {
+      this.$refs["dataForm"].validate((valid) => {
         if (valid) {
           let msg = this.temp !== undefined ? "修改成功" : "创建成功";
           save(this.temp).then(() => {
@@ -708,7 +707,7 @@ export default {
               title: "Success",
               message: msg,
               type: "success",
-              duration: 2000
+              duration: 2000,
             });
             this.getDataListFun();
           });
@@ -716,26 +715,26 @@ export default {
       });
     },
     handleBatchDelete() {
-      this.handleDelete(this.multipleSelection.map(item => item.id));
+      this.handleDelete(this.multipleSelection.map((item) => item.id));
     },
     handleDelete(ids) {
       this.$confirm("此操作将永久删除该数据, 是否继续?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
-        type: "warning"
+        type: "warning",
       }).then(() => {
         deleteData(ids).then(() => {
           this.$notify({
             title: "Success",
             message: "删除成功",
             type: "success",
-            duration: 2000
+            duration: 2000,
           });
           this.getDataListFun();
         });
       });
-    }
-  }
+    },
+  },
 };
 </script>
 

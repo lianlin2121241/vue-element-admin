@@ -3,7 +3,7 @@
     <div class="filter-container"></div>
     <el-table
       :data="tableData"
-      style="width: 100%;margin-bottom: 20px;"
+      style="width: 100%; margin-bottom: 20px"
       row-key="tagId"
       border
       default-expand-all
@@ -26,26 +26,28 @@
         width="230"
         class-name="small-padding fixed-width"
       >
-        <template
-          v-if="row.parentId == 0 && row.isCustom == 0"
-          slot-scope="{ row }"
-        >
-          <el-button type="primary" size="mini" @click="handleCreate(row)">
+        <template slot-scope="{ row, $index }">
+          <el-button
+            v-if="row.parentId === 0 && row.isCustom === 0"
+            type="primary"
+            size="mini"
+            @click="handleCreate(row)"
+          >
             添加
           </el-button>
-        </template>
-        <template v-if="row.parentId !== 0" slot-scope="{ row, $index }">
-          <el-button type="primary" size="mini" @click="handleUpdate(row)">
-            修改
-          </el-button>
-          <el-button
-            v-if="row.status != 'deleted'"
-            size="mini"
-            type="danger"
-            @click="handleDelete(row, $index)"
-          >
-            删除
-          </el-button>
+          <template v-else>
+            <el-button type="primary" size="mini" @click="handleUpdate(row)">
+              修改
+            </el-button>
+            <el-button
+              v-if="row.status != 'deleted'"
+              size="mini"
+              type="danger"
+              @click="handleDelete(row, $index)"
+            >
+              删除
+            </el-button>
+          </template>
         </template>
       </el-table-column>
     </el-table>
@@ -57,27 +59,13 @@
         :model="temp"
         label-position="left"
         label-width="90px"
-        style="width: 400px; margin-left:50px;"
+        style="width: 400px; margin-left: 50px"
       >
         <el-form-item label="标签名称" prop="name">
           <el-input v-model="temp.name" />
         </el-form-item>
         <el-form-item label="上级类别" prop="parentName">
-          <el-popover
-            ref="popover"
-            placement="bottom-start"
-            width="310"
-            trigger="focus"
-          >
-            <el-tree
-              :data="selectTableData"
-              :props="defaultProps"
-              :expand-on-click-node="false"
-              default-expand-all
-              @node-click="handleNodeClick"
-            ></el-tree>
-          </el-popover>
-          <el-input v-popover:popover v-model="temp.parentName" readonly />
+          <span>{{ temp.parentName }}</span>
         </el-form-item>
         <el-form-item label="排序" prop="orderNum">
           <el-input v-model="temp.orderNum" />
@@ -110,18 +98,18 @@ export default {
       dialogStatus: "",
       textMap: {
         update: "修改",
-        create: "新增"
+        create: "新增",
       },
       defaultProps: {
         children: "children",
-        label: "name"
+        label: "name",
       },
       temp: {
         categoryId: undefined,
         name: "",
         parentId: 0,
         parentName: "根目录",
-        orderName: 0
+        orderName: 0,
       },
       rules: {
         name: [{ required: true, message: "标签名称必填", trigger: "blur" }],
@@ -129,11 +117,11 @@ export default {
           {
             required: true,
             message: "上级分类必填",
-            trigger: "change"
-          }
+            trigger: "change",
+          },
         ],
-        orderNum: [{ required: true, message: "排序必填", trigger: "blur" }]
-      }
+        orderNum: [{ required: true, message: "排序必填", trigger: "blur" }],
+      },
     };
   },
   created() {},
@@ -142,7 +130,7 @@ export default {
   },
   methods: {
     getDataListFun() {
-      getDataTree().then(response => {
+      getDataTree().then((response) => {
         this.tableData = response.tagList;
 
         let tempTableData = _.cloneDeep(this.tableData);
@@ -155,8 +143,8 @@ export default {
             orderNum: 0,
             delFlag: 0,
             open: null,
-            children: tempTableData
-          }
+            children: tempTableData,
+          },
         ];
       });
     },
@@ -166,7 +154,7 @@ export default {
         name: "",
         parentId: 0,
         parentName: "根目录",
-        orderName: 0
+        orderName: 0,
       };
     },
     handleCreate(row) {
@@ -180,7 +168,7 @@ export default {
       });
     },
     createData() {
-      this.$refs["dataForm"].validate(valid => {
+      this.$refs["dataForm"].validate((valid) => {
         if (valid) {
           save(this.temp).then(() => {
             this.dialogFormVisible = false;
@@ -188,7 +176,7 @@ export default {
               title: "Success",
               message: "创建成功",
               type: "success",
-              duration: 2000
+              duration: 2000,
             });
             this.getDataListFun();
           });
@@ -207,7 +195,7 @@ export default {
       });
     },
     updateData() {
-      this.$refs["dataForm"].validate(valid => {
+      this.$refs["dataForm"].validate((valid) => {
         if (valid) {
           const tempData = Object.assign({}, this.temp);
           update(tempData).then(() => {
@@ -216,7 +204,7 @@ export default {
               title: "Success",
               message: "修改成功",
               type: "success",
-              duration: 2000
+              duration: 2000,
             });
             this.getDataListFun();
           });
@@ -227,14 +215,14 @@ export default {
       this.$confirm("此操作将永久删除该数据, 是否继续?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
-        type: "warning"
+        type: "warning",
       }).then(() => {
-        deleteData(data.categoryId).then(() => {
+        deleteData(data.tagId).then(() => {
           this.$notify({
             title: "Success",
             message: "删除成功",
             type: "success",
-            duration: 2000
+            duration: 2000,
           });
           this.getDataListFun();
         });
@@ -243,7 +231,7 @@ export default {
     handleNodeClick(data) {
       this.temp.parentId = data.categoryId;
       this.temp.parentName = data.name;
-    }
-  }
+    },
+  },
 };
 </script>

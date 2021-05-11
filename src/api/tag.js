@@ -1,4 +1,5 @@
 import request from '@/utils/request'
+import qs from 'qs';
 
 export function getDataList() {
   return request({
@@ -34,8 +35,8 @@ export function deleteData(id) {
   return request({
     url: `${window.globalVar.contextPath}/estateAgency/tag/delete`,
     method: 'post',
-    params: {
+    data: qs.stringify({
       tagId: id
-    }
+    })
   })
 }

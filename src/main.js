@@ -23,8 +23,6 @@ import './utils/error-log' // error log
 
 import * as filters from './filters' // global filters
 
-import Cascader from 'ant-design-vue/lib/cascader';
-
 import commonMixin from '@/mixins/commonMixin'
 
 /**
@@ -44,7 +42,8 @@ Vue.use(Element, {
   size: Cookies.get('size') || 'medium' // set element-ui default size
 })
 
-Vue.component(Cascader.name,Cascader)
+import initAntdv from '@/utils/initAntdv'
+initAntdv(Vue)
 
 // register global utility filters
 Object.keys(filters).forEach(key => {
