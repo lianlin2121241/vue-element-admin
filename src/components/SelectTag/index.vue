@@ -8,73 +8,85 @@
       option-label-prop="label"
     >
       <div slot="dropdownRender" slot-scope="menu">
+        {{ console(menu) }}
         <a-tabs
-          default-active-key="1"
           :tab-position="mode"
           :style="{ height: '200px' }"
           @prevClick="callback"
           @nextClick="callback"
+          @mousedown="e => e.preventDefault()"
         >
-          <a-tab-pane v-for="i in 30" :key="i" :tab="`Tab-${i}`">
-            Content of tab {{ i }}
+          <a-tab-pane
+            v-for="item in selectOption"
+            :key="item.tagId"
+            :tab="item.name"
+          >
+            <a-space>
+              <span v-for="itemOption in item.children" :key="itemOption.tagId">
+                {{ itemOption.name }}
+              </span>
+            </a-space>
           </a-tab-pane>
         </a-tabs>
       </div>
+      <a-select-opt-group v-for="item in selectOption" :key="item.tagId">
+        <span slot="label">
+          {{ item.name }}
+        </span>
+        <a-select-option
+          v-for="itemOption in item.children"
+          :key="itemOption.tagId"
+        >
+          {{ itemOption.name }}
+        </a-select-option>
+      </a-select-opt-group>
     </a-select>
   </div>
 </template>
 
 <script>
 import { getDataTree } from "@/api/tag";
-import deepcopy from "deepcopy";
 export default {
   name: "SelectTab",
   model: {
     prop: "value",
-    event: "change",
+    event: "change"
   },
   props: {
     value: {
-      type: String,
-      default: "",
-    },
+      type: Array,
+      default: function() {
+        return [];
+      }
+    }
   },
   data() {
     return {
-      tagsData: [],
+      selectOption: []
     };
   },
-  filters: {
-    areaCategoryFilter(arr) {
-      let copyArr = deepcopy(arr);
-      console.log("areaCategoryFilter", arr);
-      return copyArr.reverse().join(">");
-    },
+  filters: {},
+  async created() {
+    let res = await getDataTree();
+    this.selectOption = res.tagList;
   },
   mounted() {},
   activated() {},
   destroyed() {},
   methods: {
-    /**
-     * 远程匹配小区
-     */
-    async remoteMethod(query) {
-      if (query !== "") {
-        this.loading = true;
-        let { data } = await getDataTree();
-        this.loading = false;
-        this.areaOptions = data.list;
-      } else {
-        this.areaOptions = [];
-      }
-    },
     onChange(value) {
       this.$emit("change", value);
     },
     onClear() {
       this.areaOptions = [];
     },
-  },
+    callback(val) {
+      console.log(val);
+    },
+    console(info) {
+      console.log("info", info);
+    }
+  }
 };
 </script>
 <style lang="scss">
