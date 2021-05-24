@@ -5,7 +5,7 @@
       mode="multiple"
       style="width: 100%"
       placeholder="请选择标签"
-      option-label-prop="label"
+      @change="onChange"
     >
       <div slot="dropdownRender" slot-scope="menu">
         {{ console(menu) }}
@@ -21,11 +21,19 @@
             :key="item.tagId"
             :tab="item.name"
           >
-            <a-space>
-              <span v-for="itemOption in item.children" :key="itemOption.tagId">
-                {{ itemOption.name }}
-              </span>
-            </a-space>
+            <ul class="tag-container">
+              <li
+                v-for="itemOption in item.children"
+                :key="itemOption.tagId"
+                class="tag-item"
+                :class="{ active: value.includes(itemOption.tagId) }"
+                @click="clickOption(itemOption)"
+              >
+                <span>
+                  {{ itemOption.name }}
+                </span>
+              </li>
+            </ul>
           </a-tab-pane>
         </a-tabs>
       </div>
@@ -36,6 +44,7 @@
         <a-select-option
           v-for="itemOption in item.children"
           :key="itemOption.tagId"
+          :value="itemOption.tagId"
         >
           {{ itemOption.name }}
         </a-select-option>
@@ -46,8 +55,9 @@
 
 <script>
 import { getDataTree } from "@/api/tag";
+import deepcopy from "deepcopy";
 export default {
-  name: "SelectTab",
+  name: "SelectTag",
   model: {
     prop: "value",
     event: "change"
@@ -65,6 +75,13 @@ export default {
       selectOption: []
     };
   },
+  computed: {
+    convertSelectOption() {
+      return this.selectOption.reduce(function(res, item) {
+        return [...res, ...item.children];
+      }, []);
+    }
+  },
   filters: {},
   async created() {
     let res = await getDataTree();
@@ -74,9 +91,7 @@ export default {
   activated() {},
   destroyed() {},
   methods: {
-    onChange(value) {
-      this.$emit("change", value);
-    },
+    onChange(item) {},
     onClear() {
       this.areaOptions = [];
     },
@@ -85,23 +100,35 @@ export default {
     },
     console(info) {
       console.log("info", info);
+    },
+    clickOption(item) {
+      let index = this.value.indexOf(item.tagId);
+      if (index > -1) {
+        let copeArr = deepcopy(this.value);
+        copeArr.splice(index, 1);
+        this.$emit("change", copeArr);
+        return;
+      }
+      if (this.value.length >= 3) {
+        this.$message.warning("选择标签不能超过三个！");
+        return;
+      }
+      this.$emit("change", [...this.value, item.tagId]);
     }
   }
 };
 </script>
 <style lang="scss">
-.area-custom-option {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  height: initial;
-  line-height: initial;
-  p {
-    margin: 0;
-    padding: 0;
-    &.sub {
-      margin-top: 4px;
-      opacity: 0.6;
-    }
+.active {
+  color: #1890ff;
+}
+.tag-container {
+  padding: 0px 20px;
+  margin-bottom: 0px;
+  .tag-item {
+    list-style: none;
+    display: inline-block;
+    margin: 0px 10px 4px;
   }
 }
 </style>

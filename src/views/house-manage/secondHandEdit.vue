@@ -359,7 +359,7 @@
         <el-form-item label="房源标签">
           <el-row>
             <el-col :span="16">
-              <select-tag></select-tag>
+              <select-tag v-model="formData.tags"></select-tag>
             </el-col>
           </el-row>
         </el-form-item>
@@ -484,6 +484,7 @@ export default {
         propertyTypes: "",
         panshiHouseId: "",
         businessFileSaveDTOs: "",
+        tags:[]
       },
       uploadFileUrl: `${window.globalVar.fileUploadUrl}`,
       tableData: {},
